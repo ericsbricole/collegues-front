@@ -1,0 +1,17 @@
+<div class="card col-12 collaborator">
+    <div class="row">
+        <img class="img-responsive col-md-4" [src]="myCollegue.photoUrl" alt="user image">
+        <div class="card-body col-md-3">
+            <p>Fonction</p>
+            <p>département</p>
+            <p>mail</p>
+            <p>numéro</p>
+        </div>
+        <div class="card-body col-md-5">
+            <p>{{myCollegue.nom}}</p>
+            <p>{{myCollegue.prenoms}}</p>
+            <p>{{myCollegue.email}}</p>
+            <p>{{myCollegue.dateDeNaissance | date: 'né le dd/MM/yyyy'}}</p>
+        </div>
+    </div>
+</div>
