@@ -1,7 +1,6 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!!
-  </h1>
-  <app-collegue [myCollegue]="asterix"></app-collegue>
+<div style="text-align:center" class="container-fluid">
+  <div class="row">
+    <app-app-recherche-collegue-par-nom class="col-4"></app-app-recherche-collegue-par-nom>
+    <app-collegue [myCollegue]="collegueCourant" class="col-8"></app-collegue>
+  </div>
 </div>

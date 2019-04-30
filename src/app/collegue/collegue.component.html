@@ -1,17 +1,49 @@
-<div class="card col-12 collaborator">
-    <div class="row">
-        <img class="img-responsive col-md-4" [src]="myCollegue.photoUrl" alt="user image">
-        <div class="card-body col-md-3">
-            <p>Fonction</p>
-            <p>département</p>
-            <p>mail</p>
-            <p>numéro</p>
+<div class="card collaborator">
+  <div class="row">
+    <img class="img-fluid col-md-4" [src]="myCollegue.photoUrl" alt="user image">
+    <div class="card-body col-md-8">
+      <div class="row">
+        <p class="col">Matricule</p>
+        <p class="col">{{myCollegue.matricule}}</p>
+      </div>
+      <div class="row">
+        <p class="col">Nom</p>
+        <p class="col">{{myCollegue.nom | uppercase}}</p>
+      </div>
+      <div class="row">
+        <p class="col">prenoms</p>
+        <p class="col">{{myCollegue.prenoms}}</p>
+      </div>
+      <div class="row">
+        <p class="col">Date de naissance</p>
+        <p class="col">{{myCollegue.dateDeNaissance | date: 'né le dd/MM/yyyy'}}</p>
+      </div>
+
+      <div *ngIf="modifyingCollegue; else displayTemplate" class="form-group">
+        <div class="row">
+          <label for="inputEmail" class="col">email</label>
+          <input type="text" id="inputEmail" [placeholder]="myCollegue.email"/>
         </div>
-        <div class="card-body col-md-5">
-            <p>{{myCollegue.nom}}</p>
-            <p>{{myCollegue.prenoms}}</p>
-            <p>{{myCollegue.email}}</p>
-            <p>{{myCollegue.dateDeNaissance | date: 'né le dd/MM/yyyy'}}</p>
+        <div class="row">
+          <label for="inputPhoto" class="col">url de la photo:</label>
+          <input type="text" id="inputPhoto" [placeholder]="myCollegue.photoUrl"/>
         </div>
+        <div class="row justify-content-center">
+          <input type="button" value="Valider" (click)="updateCollegueIinfo()">
+        </div>
+      </div>
+
+      <ng-template #displayTemplate>
+        <div class="row">
+          <label for="inputEmail" class="col">email</label>
+          <p class="col">{{myCollegue.email}}</p>
+        </div>
+        <div class="row">
+          <a href="#" class="col-6">Créer un nouveau collegue</a>
+          <button class="center" (click)="modifyCollegue()">Modifier</button>
+        </div>
+      </ng-template>
+
     </div>
+  </div>
 </div>

@@ -1,0 +1,9 @@
+<div class="row">
+  <label class="col" for="inputName">Recherche par nom</label>
+  <input class="col" type="text" id="searchInput">
+  <button class="col" (click)="updateSearchName()">Rechercher</button>
+</div>
+
+<ul *ngFor="let matricule of searchCollegues()">
+  <li>{{matricule}}</li>
+</ul>
