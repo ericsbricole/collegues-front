@@ -17,7 +17,7 @@ export class AppRechercheCollegueParNomComponent implements OnInit {
 
   ngOnInit() { }
 
-  updateSearchName(event: Event) {
+  updateSearchName() {
     const searchInput: HTMLInputElement = document.getElementById('searchInput') as HTMLInputElement;
     this.searchName = searchInput.value;
   }
