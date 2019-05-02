@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Collegue } from './models/Collegue';
-import { collegueMock } from './mock/collegues.mock';
 import { DataService } from './services/data.service';
 
 @Component({
@@ -14,7 +13,5 @@ export class AppComponent implements OnInit {
 
   constructor(private _dataService: DataService) {}
 
-  public ngOnInit() {
-    this.collegueCourant = this._dataService.recupererCollegueCourant();
-  }
+  public ngOnInit() { }
 }

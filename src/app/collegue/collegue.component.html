@@ -22,11 +22,11 @@
       <div *ngIf="modifyingCollegue; else displayTemplate" class="form-group">
         <div class="row">
           <label for="inputEmail" class="col">email</label>
-          <input type="text" id="inputEmail" [placeholder]="myCollegue.email"/>
+          <input type="text" id="inputEmail" [placeholder]="myCollegue.email" />
         </div>
         <div class="row">
           <label for="inputPhoto" class="col">url de la photo:</label>
-          <input type="text" id="inputPhoto" [placeholder]="myCollegue.photoUrl"/>
+          <input type="text" id="inputPhoto" [placeholder]="myCollegue.photoUrl" />
         </div>
         <div class="row justify-content-center">
           <input type="button" value="Valider" (click)="updateCollegueIinfo()">
