@@ -1,0 +1,42 @@
+<form (ngSubmit)="createCollegue()" class="form-group" #modifyCollegueFG="ngForm">
+  <div class="row">
+    <label for="inputNom" class="col-6">nom</label>
+    <input type="text" class="col-5" [placeholder]="collegueToCreate.nom" #nomFC="ngModel"
+      [(ngModel)]="collegueToCreate.nom" name="inputNom" required />
+    <span class="col-12 controlError" *ngIf="nomFC.invalid && nomFC.touched">Ce champ est invalide</span>
+  </div>
+  <div class="row">
+    <label for="inputPrenoms" class="col-6">prénoms</label>
+    <input type="text" class="col-5" [placeholder]="collegueToCreate.prenoms" #prenomsFC="ngModel"
+      [(ngModel)]="collegueToCreate.prenoms" name="inputPrenoms" required />
+    <span class="col-12 controlError" *ngIf="prenomsFC.invalid && prenomsFC.touched">Ce champ est invalide</span>
+  </div>
+  <div class="row">
+    <label for="inputEmail" class="col-6">email</label>
+    <input type="text" class="col-5" [placeholder]="collegueToCreate.email" #emailFC="ngModel"
+      [(ngModel)]="collegueToCreate.email" name="inputEmail" required />
+    <span class="col-12 controlError" *ngIf="emailFC.invalid && nomFC.touched">Ce champ est invalide</span>
+  </div>
+  <div class="row">
+    <label for="inputDateDeNaissance" class="col-6">date de naissance</label>
+    <input type="date" class="col-5" #dateDeNaissanceFC="ngModel"
+      [ngModel]="collegueToCreate.dateDeNaissance | date: 'yyyy-MM-dd'"
+      (ngModelChange)="collegueToCreate.dateDeNaissance = $event" name="inputDateDeNaissance" required />
+    <span class="col-12 controlError" *ngIf="dateDeNaissanceFC.invalid && dateDeNaissanceFC.touched">Ce champ est
+      invalide</span>
+  </div>
+  <div class="row">
+    <label for="inputPhoto" class="col-6">url de la photo:</label>
+    <input type="text" class="col-5" [placeholder]="" #photoFC="ngModel" [(ngModel)]="collegueToCreate.photoUrl"
+      name="inputPhoto" required minlength="7" />
+    <span class="col-12 controlError" *ngIf="photoFC.invalid && photoFC.touched">Ce champ est invalide</span>
+  </div>
+  <div class="row justify-content-center">
+    <input type="submit" value="Valider" class="btn btn-info"
+      [disabled]="nomFC.invalid || prenomsFC.invalid || emailFC.invalid || dateDeNaissanceFC.invalid || photoFC.invalid">
+  </div>
+</form>
+<div class="row">
+  <span class="text-danger col-12" *ngIf="createNewCollegueError.length > 0">{{createNewCollegueError}}</span>
+  <span class="text-success col-12" *ngIf="createNewCollegueSuccessMsg.length > 0">{{createNewCollegueSuccessMsg}}</span>
+</div>

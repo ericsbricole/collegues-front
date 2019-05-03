@@ -1,49 +1,63 @@
-<div class="card collaborator">
-  <div class="row">
-    <img class="img-fluid col-md-4" [src]="myCollegue.photoUrl" alt="user image">
-    <div class="card-body col-md-8">
-      <div class="row">
-        <p class="col">Matricule</p>
-        <p class="col">{{myCollegue.matricule}}</p>
-      </div>
-      <div class="row">
-        <p class="col">Nom</p>
-        <p class="col">{{myCollegue.nom | uppercase}}</p>
-      </div>
-      <div class="row">
-        <p class="col">prenoms</p>
-        <p class="col">{{myCollegue.prenoms}}</p>
-      </div>
-      <div class="row">
-        <p class="col">Date de naissance</p>
-        <p class="col">{{myCollegue.dateDeNaissance | date: 'né le dd/MM/yyyy'}}</p>
-      </div>
+<ng-template #infosCollegues>
+  <div class="card collaborator">
+    <div class="row">
+      <img class="img-fluid col-md-4" [src]="myCollegue.photoUrl" alt="user image">
+      <div class="card-body col-md-8">
+        <div class="row">
+          <p class="col">Matricule</p>
+          <p class="col">{{myCollegue.matricule}}</p>
+        </div>
+        <div class="row">
+          <p class="col">Nom</p>
+          <p class="col">{{myCollegue.nom | uppercase}}</p>
+        </div>
+        <div class="row">
+          <p class="col">prenoms</p>
+          <p class="col">{{myCollegue.prenoms}}</p>
+        </div>
+        <div class="row">
+          <p class="col">Date de naissance</p>
+          <p class="col">{{myCollegue.dateDeNaissance | date: 'né le dd/MM/yyyy'}}</p>
+        </div>
 
-      <div *ngIf="modifyingCollegue; else displayTemplate" class="form-group">
-        <div class="row">
-          <label for="inputEmail" class="col">email</label>
-          <input type="text" id="inputEmail" [placeholder]="myCollegue.email" />
-        </div>
-        <div class="row">
-          <label for="inputPhoto" class="col">url de la photo:</label>
-          <input type="text" id="inputPhoto" [placeholder]="myCollegue.photoUrl" />
-        </div>
-        <div class="row justify-content-center">
-          <input type="button" value="Valider" (click)="updateCollegueIinfo()">
-        </div>
+        <form *ngIf="modifyingCollegue; else displayTemplate" (ngSubmit)="submitModifyCollegue()" class="form-group"
+          #modifyCollegueFG="ngForm">
+          <div class="row">
+            <label for="inputEmail" class="col-6">email</label>
+            <input type="text" class="col-5" [placeholder]="myCollegue.email" #emailFC="ngModel"
+              [(ngModel)]="myCollegue.email" name="email" required />
+            <span class="col-12 controlError" *ngIf="emailFC.invalid">Ce champ est invalide</span>
+          </div>
+          <div class="row">
+            <label for="inputPhoto" class="col-6">url de la photo:</label>
+            <input type="text" class="col-5" [placeholder]="myCollegue.photoUrl" #photoFC="ngModel"
+              [(ngModel)]="myCollegue.photoUrl" name="photoUrl" required minlength="7" />
+            <span class="col-12 controlError" *ngIf="photoFC.invalid">Ce champ est invalide</span>
+          </div>
+          <div class="row justify-content-center">
+            <input type="submit" value="Valider" [disabled]="emailFC.invalid || photoFC.invalid">
+          </div>
+        </form>
+
+        <ng-template #displayTemplate>
+          <div class="row">
+            <label for="inputEmail" class="col">email</label>
+            <p class="col">{{myCollegue.email}}</p>
+          </div>
+          <div class="row">
+            <a href="#" class="col-6" (click)="hideOrShowCreateCompo()">Créer un nouveau collegue</a>
+            <button class="center btn btn-primary" (click)="hideOrShowModifyCollegueForm()">Modifier</button>
+          </div>
+        </ng-template>
       </div>
-
-      <ng-template #displayTemplate>
-        <div class="row">
-          <label for="inputEmail" class="col">email</label>
-          <p class="col">{{myCollegue.email}}</p>
-        </div>
-        <div class="row">
-          <a href="#" class="col-6">Créer un nouveau collegue</a>
-          <button class="center" (click)="modifyCollegue()">Modifier</button>
-        </div>
-      </ng-template>
-
     </div>
+  </div>
+</ng-template>
+
+<div class="col-12" *ngIf="createNewCollegue; else infosCollegues">
+  <app-creer-collegue></app-creer-collegue>
+  <div class="offset-4">
+    <button class="btn btn-info" (click)="hideOrShowCreateCompo()">retour aux informations du collègue
+      {{myCollegue.nom}}</button>
   </div>
 </div>

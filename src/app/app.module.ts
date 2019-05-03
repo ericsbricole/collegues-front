@@ -7,17 +7,21 @@ import { CollegueComponent } from './collegue/collegue.component';
 import { AppRechercheCollegueParNomComponent } from './app-recherche-collegue-par-nom/app-recherche-collegue-par-nom.component';
 import { HttpClientModule } from '@angular/common/http';
 import { Subject } from 'rxjs';
+import { FormsModule } from '@angular/forms';
+import { CreerCollegueComponent } from './creer-collegue/creer-collegue.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CollegueComponent,
-    AppRechercheCollegueParNomComponent
+    AppRechercheCollegueParNomComponent,
+    CreerCollegueComponent
   ],
   imports: [
     BrowserModule,
     NgbModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

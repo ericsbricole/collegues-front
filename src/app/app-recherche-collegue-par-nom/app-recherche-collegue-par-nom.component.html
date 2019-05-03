@@ -1,9 +1,11 @@
 <div class="row">
   <label class="col" for="inputName">Recherche par nom</label>
   <input class="col" type="text" #inputNameSearched>
-  <button class="col" (click)="searchByName(inputNameSearched.value)">Rechercher</button>
+  <button class="col" (click)="searchByName(inputNameSearched.value)" class="btn btn-primary">Rechercher</button>
 </div>
 
-<ul *ngFor="let matricule of matricules">
-  <li (click)='publishCollegueCourant(matricule)'>{{matricule}}</li>
+<ul>
+  <li *ngFor="let matricule of matricules" (click)='publishCollegueCourant(matricule)'>
+    <a href="#">{{matricule}}</a>
+  </li>
 </ul>

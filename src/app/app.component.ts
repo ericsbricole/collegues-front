@@ -13,5 +13,10 @@ export class AppComponent implements OnInit {
 
   constructor(private _dataService: DataService) {}
 
-  public ngOnInit() { }
+  public ngOnInit() {
+
+    this._dataService.exposeCollegueCourant().subscribe(
+      collegue => this.collegueCourant = collegue
+    );
+  }
 }
