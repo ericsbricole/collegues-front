@@ -27,9 +27,9 @@
   </div>
   <div class="row">
     <label for="inputPhoto" class="col-6">url de la photo:</label>
-    <input type="text" class="col-5" [placeholder]="" #photoFC="ngModel" [(ngModel)]="collegueToCreate.photoUrl"
-      name="inputPhoto" required minlength="7" />
-    <span class="col-12 controlError" *ngIf="photoFC.invalid && photoFC.touched">Ce champ est invalide</span>
+    <input appUrlValidator type="text" class="col-5" [placeholder]="" #photoFC="ngModel"
+      [(ngModel)]="collegueToCreate.photoUrl" name="inputPhoto" required minlength="7" />
+    <span class="col-12 text-danger" *ngIf="photoFC.invalid && photoFC.touched">Ce champ doit commencer par http et avoir au moins 7 charactères</span>
   </div>
   <div class="row justify-content-center">
     <input type="submit" value="Valider" class="btn btn-info"
@@ -38,5 +38,6 @@
 </form>
 <div class="row">
   <span class="text-danger col-12" *ngIf="createNewCollegueError.length > 0">{{createNewCollegueError}}</span>
-  <span class="text-success col-12" *ngIf="createNewCollegueSuccessMsg.length > 0">{{createNewCollegueSuccessMsg}}</span>
+  <span class="text-success col-12"
+    *ngIf="createNewCollegueSuccessMsg.length > 0">{{createNewCollegueSuccessMsg}}</span>
 </div>

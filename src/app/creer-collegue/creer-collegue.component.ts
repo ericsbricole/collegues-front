@@ -33,7 +33,8 @@ export class CreerCollegueComponent implements OnInit {
     this._createNewCollegueError = '';
     this._createNewCollegueSuccessMsg = '';
     this._dataService.createCollegue(this._collegueToCreate).subscribe(
-      (collegue: Collegue) => { this._createNewCollegueSuccessMsg = `Le collègue ${collegue.nom} a été crée avec succés!`},
+      (collegueCreated: Collegue) => { this._createNewCollegueSuccessMsg = `Le collègue ${collegueCreated.nom} a été crée avec succés!`;
+    },
       (error: Error) => this._createNewCollegueError = `Une erreur ${error.name} est arrivée à la création du collègue.`
     );
 

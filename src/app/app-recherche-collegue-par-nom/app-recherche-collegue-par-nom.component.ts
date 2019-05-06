@@ -12,10 +12,18 @@ export class AppRechercheCollegueParNomComponent implements OnInit {
 
   public searchName = '';
   public matricules: string[];
+  private _cacheCollegues = new Map<string, Collegue>();
+
 
   constructor(private _dataService: DataService) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this._dataService.createdCollegueSubject.subscribe(
+      collegueCreated => {
+        this.putCollegueInCache(collegueCreated);
+      }
+    );
+  }
 
   searchByName(nameSearchedFor: string) {
     this.searchName = nameSearchedFor;
@@ -30,7 +38,19 @@ export class AppRechercheCollegueParNomComponent implements OnInit {
   }
 
   publishCollegueCourant(matricule: string): void {
-    this._dataService.publishCollegueCourant(matricule).subscribe(col => {}, err => {});
+    if (this._cacheCollegues.has(matricule)) {
+      this._dataService.exposeCollegueCourant().next(this._cacheCollegues.get(matricule));
+    }
+    this._dataService.publishCollegueCourant(matricule).subscribe(collegueFound => {
+      this.putCollegueInCache(collegueFound);
+    }, err => { });
+  }
+
+  putCollegueInCache(collegueToPutInCache: Collegue) {
+    if (!this._cacheCollegues.has(collegueToPutInCache.matricule)) {
+      console.log(`ajout de ${collegueToPutInCache.nom} dans le cache`);
+      this._cacheCollegues.set(collegueToPutInCache.matricule, collegueToPutInCache);
+    }
   }
 
 }

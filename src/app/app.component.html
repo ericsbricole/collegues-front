@@ -1,6 +1,8 @@
 <div style="text-align:center" class="container-fluid">
+
+      <app-menu></app-menu>
+
   <div class="row">
-    <app-app-recherche-collegue-par-nom class="col-4"></app-app-recherche-collegue-par-nom>
-    <app-collegue [myCollegue]="collegueCourant" *ngIf="collegueCourant !== undefined" class="col-8"></app-collegue>
+    <router-outlet></router-outlet>
   </div>
 </div>

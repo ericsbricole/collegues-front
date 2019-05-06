@@ -1,17 +1,23 @@
 import { Injectable } from '@angular/core';
 import { Collegue } from '../models/Collegue';
-import { environment } from '../../environments/environment.prod';
+import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { PhotoCollegue } from '../models/PhotoCollegue';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
 
-  private URL_BACKEND: string = environment.backendUrl;
-  private _subject: Subject<Collegue> = new Subject<Collegue>();
+  private URL_BACKEND = environment.backendUrl;
+  private _subject = new Subject<Collegue>();
+  private _createdCollegueSubject = new Subject<Collegue>();
+
+  get createdCollegueSubject() {
+    return this._createdCollegueSubject;
+  }
 
   constructor(private _http: HttpClient) { }
 
@@ -48,7 +54,7 @@ export class DataService {
     });
   }
 
-  createCollegue(collegueAAjouter: Collegue) {
+  createCollegue(collegueAAjouter: Collegue): Observable<Collegue> {
     const body = {
       'nom': collegueAAjouter.nom,
       'prenoms': collegueAAjouter.prenoms,
@@ -56,8 +62,14 @@ export class DataService {
       'dateDeNaissance': collegueAAjouter.dateDeNaissance,
       'photoUrl': collegueAAjouter.photoUrl
     };
-    return this._http.post(`${this.URL_BACKEND}/collegues/`, body);
+    return this._http.post<Collegue>(`${this.URL_BACKEND}/collegues/`, body)
+      .pipe(
+        tap((collegueCreated: Collegue) => this._createdCollegueSubject.next(collegueCreated))
+      );
 
   }
 
+  rechercherToutesLesPhotos() {
+    return this._http.get<PhotoCollegue[]>(`${this.URL_BACKEND}/collegues/photos`);
+  }
 }

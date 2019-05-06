@@ -13,6 +13,7 @@ export class CollegueComponent implements OnInit, OnDestroy {
 
   public modifyingCollegue = false;
   private _createNewCollegue = false;
+
   get createNewCollegue() {
     return this._createNewCollegue;
   }
@@ -22,11 +23,14 @@ export class CollegueComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this._dataService.exposeCollegueCourant().subscribe(
-      collegue => this.myCollegue = collegue
+      collegue => this.myCollegue = collegue,
     );
   }
 
-  ngOnDestroy() { }
+  ngOnDestroy() {
+    this._dataService.exposeCollegueCourant().unsubscribe();
+    this._dataService.createdCollegueSubject.unsubscribe();
+  }
 
   hideOrShowModifyCollegueForm() {
     console.log('Modification du collègue');

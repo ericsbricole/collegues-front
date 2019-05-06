@@ -1,0 +1,13 @@
+<div class='row'>
+  <div class='offset-4 col-4'>
+
+    <span *ngIf='mesgError.length > 0' class='text-danger'>{{mesgError}}</span>
+    <div *ngFor="let photo of photos">
+      <a [routerLink]="['/gallerie/', photo.matricule]" routerLinkActive="router-link-active" routerLinkActive="router-link-active" >
+        <img [src]="photo.photoUrl" class='img-fluid'>
+      </a>
+    </div>
+
+  </div>
+
+</div>
