@@ -15,7 +15,7 @@ export class AppComponent implements OnInit {
 
   public ngOnInit() {
 
-    this._dataService.exposeCollegueCourant().subscribe(
+    this._dataService.subject.subscribe(
       collegue => this.collegueCourant = collegue
     );
   }

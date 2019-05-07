@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, EventEmitter, Output, OnDestroy } from '@angular/core';
 import { Collegue } from '../models/Collegue';
 import { DataService } from '../services/data.service';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, Subscription } from 'rxjs';
 import { FormControl } from '@angular/forms';
 
 @Component({
@@ -13,6 +13,11 @@ export class CollegueComponent implements OnInit, OnDestroy {
 
   public modifyingCollegue = false;
   private _createNewCollegue = false;
+  private _subscription: Subscription;
+
+  get subscription() {
+    return this._subscription;
+  }
 
   get createNewCollegue() {
     return this._createNewCollegue;
@@ -22,19 +27,17 @@ export class CollegueComponent implements OnInit, OnDestroy {
   constructor(private _dataService: DataService) { }
 
   ngOnInit() {
-    this._dataService.exposeCollegueCourant().subscribe(
-      collegue => this.myCollegue = collegue,
+    this._subscription = this._dataService.subject.subscribe(
+      collegue => {
+        console.log(`récupération du collègue ${collegue.prenoms} publié par le subject`);
+        this.myCollegue = collegue;
+      }
     );
   }
 
   ngOnDestroy() {
-    this._dataService.exposeCollegueCourant().unsubscribe();
-    this._dataService.createdCollegueSubject.unsubscribe();
-  }
-
-  hideOrShowModifyCollegueForm() {
-    console.log('Modification du collègue');
-    this.modifyingCollegue = !this.modifyingCollegue;
+    console.log(`unsubscribe() du subject à la destruction du compo collègue`);
+    this._subscription.unsubscribe();
   }
 
   submitModifyCollegue() {
@@ -54,5 +57,11 @@ export class CollegueComponent implements OnInit, OnDestroy {
   hideOrShowCreateCompo() {
     this._createNewCollegue = !this._createNewCollegue;
   }
+
+  hideOrShowModifyCollegueForm() {
+    console.log('Modification du collègue');
+    this.modifyingCollegue = !this.modifyingCollegue;
+  }
+
 
 }

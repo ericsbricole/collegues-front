@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Collegue } from '../models/Collegue';
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, of } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { PhotoCollegue } from '../models/PhotoCollegue';
 
@@ -14,9 +14,18 @@ export class DataService {
   private URL_BACKEND = environment.backendUrl;
   private _subject = new Subject<Collegue>();
   private _createdCollegueSubject = new Subject<Collegue>();
+  private _cacheCollegues = new Map<string, Collegue>();
+
+  get subject() {
+    return this._subject;
+  }
 
   get createdCollegueSubject() {
     return this._createdCollegueSubject;
+  }
+
+  get cacheCollegues() {
+    return this._cacheCollegues;
   }
 
   constructor(private _http: HttpClient) { }
@@ -34,10 +43,6 @@ export class DataService {
       .pipe(
         tap(col => this._subject.next(col))
       );
-  }
-
-  exposeCollegueCourant() {
-    return this._subject;
   }
 
   modifyColleguePhotoUrl(matricule: string, newPhotoUrl: string): Observable<Collegue> {
@@ -66,7 +71,6 @@ export class DataService {
       .pipe(
         tap((collegueCreated: Collegue) => this._createdCollegueSubject.next(collegueCreated))
       );
-
   }
 
   rechercherToutesLesPhotos() {

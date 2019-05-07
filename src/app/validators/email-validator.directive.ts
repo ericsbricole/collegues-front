@@ -13,9 +13,7 @@ export class EmailValidatorDirective implements AsyncValidator {
   constructor(private _dataService: DataService) { }
 
   validate(control: AbstractControl): Observable<ValidationErrors> | null {
-    const controlValue: string = control.value;
-
-    return null;
+    throw new Error("methode pas encore implementee");
   }
 
 

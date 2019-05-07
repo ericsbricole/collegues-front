@@ -14,7 +14,7 @@ export class AccueilComponent implements OnInit {
   constructor(private _dataService: DataService) { }
 
   ngOnInit() {
-    this._dataService.exposeCollegueCourant().subscribe(
+    this._dataService.subject.subscribe(
       collegue => this.collegueCourant = collegue
     );
   }
