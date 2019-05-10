@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Collegue } from '../models/Collegue';
-import { environment } from '../../environments/environment';
+import { environment } from '../../environments/environment.prod';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subject, of } from 'rxjs';
 import { tap } from 'rxjs/operators';
