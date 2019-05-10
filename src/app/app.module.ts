@@ -16,6 +16,7 @@ import { RouterModule } from '@angular/router';
 import { ADMIN_ROUTES } from 'src/admin.routes';
 import { AccueilComponent } from './accueil/accueil.component';
 import { InfoCollegueComponent } from './info-collegue/info-collegue.component';
+import { AuthentificationComponent } from './authentification/authentification.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { InfoCollegueComponent } from './info-collegue/info-collegue.component';
     MenuComponent,
     GallerieComponent,
     AccueilComponent,
-    InfoCollegueComponent
+    InfoCollegueComponent,
+    AuthentificationComponent
   ],
   imports: [
     BrowserModule,

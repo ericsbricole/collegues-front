@@ -47,25 +47,25 @@ export class DataService {
 
   modifyColleguePhotoUrl(matricule: string, newPhotoUrl: string): Observable<Collegue> {
     return this._http.patch<Collegue>(`${this.URL_BACKEND}/collegues/modifyPhotoUrl`, {
-      'matricule': matricule,
-      'photoUrl': newPhotoUrl
+      matricule,
+      photoUrl: newPhotoUrl
     });
   }
 
   modifyCollegueEmail(matricule: string, newEmail: string): Observable<Collegue> {
     return this._http.patch<Collegue>(`${this.URL_BACKEND}/collegues/modifyEmail`, {
-      'matricule': matricule,
-      'email': newEmail
+      matricule,
+      email: newEmail
     });
   }
 
   createCollegue(collegueAAjouter: Collegue): Observable<Collegue> {
     const body = {
-      'nom': collegueAAjouter.nom,
-      'prenoms': collegueAAjouter.prenoms,
-      'email': collegueAAjouter.email,
-      'dateDeNaissance': collegueAAjouter.dateDeNaissance,
-      'photoUrl': collegueAAjouter.photoUrl
+      nom: collegueAAjouter.nom,
+      prenoms: collegueAAjouter.prenoms,
+      email: collegueAAjouter.email,
+      dateDeNaissance: collegueAAjouter.dateDeNaissance,
+      photoUrl: collegueAAjouter.photoUrl
     };
     return this._http.post<Collegue>(`${this.URL_BACKEND}/collegues/`, body)
       .pipe(

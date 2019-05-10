@@ -21,14 +21,14 @@ export class InfoCollegueComponent implements OnInit, OnDestroy {
   constructor(private _route: ActivatedRoute, private _dataService: DataService) { }
 
   ngOnInit() {
-    const matricule = this._route.snapshot.params["MATRICULE_SELECTIONNE"];
+    const matricule = this._route.snapshot.params.MATRICULE_SELECTIONNE;
     this._subscription = this._dataService.subject.subscribe(
       collegueCourant => this._collegueCourant = collegueCourant,
-      (error: Error) => console.log(`erreur ${error.name}\n ${error.message}`)
+      (error: Error) => console.log(`erreur ${error.name}\n${error.message}`)
     );
     this._dataService.publishCollegueCourant(matricule).subscribe(
       col => { },
-      (error: Error) => console.log(`erreur ${error.name}\n ${error.message}`)
+      (error: Error) => console.log(`erreur ${error.name}\n${error.message}`)
     );
   }
 

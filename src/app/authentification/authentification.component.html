@@ -1,0 +1,5 @@
+<form action="post" class="form-group" (ngSubmit)="onSubmit(loginFG)" #loginFG>
+  <input type="email"  placeholder="email" [(ngModel)]="infosAuthent.email" name="email">
+  <input type="password" placeholder="mot de passe" [(ngModel)]="infosAuthent.motDePasse" name="motDePasse">
+  <input type="submit" routerLink="/" routerLinkActive="active">
+</form>
